@@ -1,0 +1,133 @@
+<!doctype html>
+<!--
+ * js-input-rating-unicode
+ * JavaScript rating input element using Unicode
+ *
+ * Version 0.6.1
+ * http://code.behnam.es/js-input-rating-unicode/
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Copyright (C) 2011-2012  Behnam Esfahbod  <http://behnam.es/>
+ -->
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test Page - JavaScript rating input element using Unicode</title>
+
+    <!-- SETUP input-rating-unicode -->
+    <script src="lib/jquery-1.8.2.min.js"></script>
+    <script charset="utf-8" src="lib/js-input-rating-unicode.js"></script>
+    <link rel="stylesheet" href="lib/js-input-rating-unicode.css" />
+    <script>
+      input_rating_unicode.config.default_options.mode = 'BLACK SQUARE';
+    </script>
+    <!-- /SETUP input-rating-unicode -->
+
+    <script>
+      input_rating_unicode.config.on_init = function() {
+        var ur_modes = input_rating_unicode.config.modes;
+        var $input_rating_unicode = $(".input-rating-unicode");
+
+        /* mode */
+        var $mode = $('#mode');
+        var options = $mode.prop ? $mode.prop('options') : $mode.attr('options');
+        $('option', $mode).remove();
+        $.each(ur_modes, function(val, text) {
+          options[options.length] = new Option(text, val);
+        });
+        $mode.val("BLACK SQUARE, ORTHOGONAL, VERTICAL");
+        // Callbacks
+        $mode.change(function(ev) {
+          $input_rating_unicode.each(function() {
+            input_rating_unicode.set_option(this, 'mode', ev.target.value);
+          });
+        }).change();
+
+        /* min/max/size */
+        $.each('min max size'.split(' '), function(idx, opt) {
+          $('#'+opt).change(function(ev) {
+            var value = ev.target.value;
+            $input_rating_unicode.each(function() {
+              input_rating_unicode.set_option(this, opt,
+                (value !== null) ? parseFloat(value) : null);
+            });
+          }).change();
+        });
+
+        /* size-auto */
+        $('#size-auto').change(function(ev) {
+          var value = $(ev.target).is(':checked');
+          $input_rating_unicode.each(function() {
+            input_rating_unicode.set_option(this, 'size-auto', value);
+          });
+          $('#size').change();
+        });
+
+      };
+    </script>
+
+    <style>
+      .section {
+        border: 1px dashed gray;
+        margin: 1em;
+        padding: 1em;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <h1>JavaScript rating input element using Unicode</h1>
+
+    <h2>Test Page</h2>
+    More details <a href="README.md">README file</a> and
+    <a href="http://code.behnam.es/js-input-rating-unicode/">project homepage</a>.
+
+    <h3>Sample</h3>
+    <div class="section">
+
+      <label for="test">Rate:</label>
+      <input id="test" type="number" value="2.75" class="input-rating-unicode" />
+
+    </div>
+
+    <h3>Options</h3>
+    <div class="section">
+
+      <label for="mode">Mode:</label>
+      <select id="mode" style="font: 24px monospace; letter-spacing: 2px;"></select>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <label for="min">Min:</label>
+      <input type="number" id="min" min="0" max="20" step=".5" value="0" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <label for="max">Max:</label>
+      <input type="number" id="max" min="0" max="20" step=".5" value="5" />
+      &nbsp;&nbsp;&nbsp;&nbsp;
+
+      <label for="size">Size:</label>
+      <input type="number" id="size" min="0" max="20" value="5" />
+      /
+      <input type="checkbox" id="size-auto" checked="" />
+      <label for="size-auto">auto</label>
+
+    </div>
+
+  </body>
+</html>
+
+
