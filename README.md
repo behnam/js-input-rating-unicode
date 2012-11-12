@@ -1,5 +1,9 @@
+js-input-rating-unicode
+=======================
+
 JavaScript rating input element using Unicode
-=============================================
+
+Version 0.6.1
 
 <http://code.behnam.es/js-input-rating-unicode/>
 
@@ -46,6 +50,12 @@ And here's a list of supported modes:
     * ■▩▨□		BLACK SQUARE, DIAGONAL, LOWER LEFT
     * □■		WHITE SQUARE
     * □◨■		WHITE SQUARE, HALF
+    * □▦■		WHITE SQUARE, ORTHOGONAL
+    * □▤▦■		WHITE SQUARE, ORTHOGONAL, HORIZONTAL
+    * □▥▦■		WHITE SQUARE, ORTHOGONAL, VERTICAL
+    * □▩■		WHITE SQUARE, DIAGONAL
+    * □▧▩■		WHITE SQUARE, DIAGONAL, LOWER RIGHT
+    * □▨▩■		WHITE SQUARE, DIAGONAL, LOWER LEFT
     * █▇▆▅▄▃▂▁ 		BLACK BLOCK, STEPS
     * █▉▊▋▌▍▎▏ 		BLACK BLOCK, BARS
     * █▓▒░ 		BLACK BLOCK, SHADES
